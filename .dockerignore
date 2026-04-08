@@ -1,0 +1,13 @@
+node_modules
+vendor
+.env
+.env.*
+.git
+.gitignore
+deploy.zip
+deploy.zip.zip
+deploy.zip/
+storage/*.key
+/storage/pail
+/public/hot
+/public/build
