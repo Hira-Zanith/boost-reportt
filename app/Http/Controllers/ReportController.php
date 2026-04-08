@@ -85,8 +85,8 @@ class ReportController extends Controller
         $report->save();
 
         // ៣. រៀបចំទិន្នន័យសម្រាប់ Telegram
-        $token = "8772483908:AAENzt2TkxYLbpLx_o1UWUXRjip0uDuQxUY";
-        $chat_id = "-1003871438575";
+        $token = env('TELEGRAM_BOT_TOKEN');
+        $chat_id = env('TELEGRAM_CHAT_ID');
         
         // គណនា Cost Per Message (CPM)
         $cpm = ($report->messages > 0) ? number_format($report->spend / $report->messages, 2) : 0;
@@ -110,7 +110,7 @@ class ReportController extends Controller
             . "━━━━━━━━━━━━━━━\n"
             . "✅ <i>រក្សាទុកក្នុងប្រព័ន្ធរួចរាល់</i>";
 
-        // ៤. ផ្ញើទៅ Telegram (ប្រើ post() ជំនួស get() ដើម្បីសុវត្ថិភាព និងទិន្នន័យធំ)
+        // ៤. ផ្ញើទៅ Telegram (ប្រើ post() ជំនួស get() ជំនួស get() ដើម្បីសុវត្ថិភាព និងទិន្នន័យធំ)
         $response = \Illuminate\Support\Facades\Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
             'chat_id'    => $chat_id,
             'text'       => $text,
