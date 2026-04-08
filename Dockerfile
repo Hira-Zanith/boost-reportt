@@ -46,4 +46,4 @@ COPY --from=node /app/public/build ./public/build
 COPY --from=builder /app .
 RUN php artisan package:discover --ansi
 EXPOSE 8000
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["sh", "-lc", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
