@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+RUN composer install --ignore-platform-req=ext-gd --no-dev --optimize-autoloader --no-interaction --no-scripts
 COPY . .
 RUN composer dump-autoload --optimize
 
@@ -47,3 +47,5 @@ COPY --from=builder /app .
 RUN php artisan package:discover --ansi
 EXPOSE 8000
 CMD ["sh", "-lc", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"]
+
+
